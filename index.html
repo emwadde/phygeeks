@@ -3,592 +3,263 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application form for Online Physics Class</title>
+    <title>Phygeeks Application</title>
+    <script type="module" src="/src/main.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        :root {
-            --primary: #FF6B35;
-            --secondary: #EF233C;
-            --dark: #292929;
-            --light: #F7F7F7;
-            --accent: #FFA630;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            animation: fadeInDown 1s ease;
-        }
-        
-        .logo {
-            width: 150px;
-            height: auto;
-            margin-bottom: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
-        }
-        
-        .logo:hover {
-            transform: scale(1.05);
-        }
-        
-        h1 {
-            color: var(--primary);
-            font-size: 2.2rem;
-            margin-bottom: 5px;
-        }
-        
-        .subtitle {
-            color: var(--secondary);
-            font-size: 1rem;
-            margin-bottom: 20px;
-        }
-        
-        .subtitle a {
-            color: var(--secondary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .subtitle a:hover {
-            text-decoration: underline;
-        }
-        
-        .form-container {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            margin-bottom: 30px;
-            animation: slideUp 0.8s ease;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-        
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark);
-        }
-        
-        input, select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 6px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background-color: #f9f9f9;
-        }
-        
-        input:focus, select:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
-            background-color: white;
-        }
-        
-        .input-with-prefix {
-            display: flex;
-            align-items: center;
-        }
-        
-        .prefix {
-            padding: 12px 10px;
-            background-color: #eee;
-            border: 2px solid #e0e0e0;
-            border-right: none;
-            border-radius: 6px 0 0 6px;
-            font-size: 16px;
-        }
-        
-        .input-with-prefix input {
-            border-radius: 0 6px 6px 0;
-            flex: 1;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(239, 35, 60, 0.3);
-            opacity: 0;
-            transform: scale(0.9);
-            animation: fadeInScale 0.8s ease 0.4s forwards;
-        }
-        
-        @keyframes fadeInScale {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(239, 35, 60, 0.4);
-        }
-        
-        .btn:active {
-            transform: translateY(1px);
-        }
-        
-        .btn-container {
-            text-align: center;
-            margin-top: 30px;
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        .timing-container {
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .timing-slide {
-            width: 100%;
-            height: 500px;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            transform: translateY(-20px);
-            transition: all 0.3s ease;
-        }
-        
-        .modal.active .modal-content {
-            transform: translateY(0);
-        }
-        
-        .modal h2 {
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .modal p {
-            margin-bottom: 20px;
-        }
-        
-        .modal-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .modal-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        footer {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            text-align: center;
-            padding: 15px;
-            font-size: 14px;
-        }
-        
-        footer a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        footer a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Responsive styles */
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .form-container {
-                padding: 20px;
-            }
-            
-            input, select {
-                padding: 10px 12px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-            
-            .logo {
-                width: 120px;
-            }
-            
-            .btn {
-                width: 100%;
-            }
-        }
-        
-        /* Animation delays for form groups */
-        .form-group:nth-child(1) { animation-delay: 0.1s; }
-        .form-group:nth-child(2) { animation-delay: 0.2s; }
-        .form-group:nth-child(3) { animation-delay: 0.3s; }
-        .form-group:nth-child(4) { animation-delay: 0.4s; }
-        .form-group:nth-child(5) { animation-delay: 0.5s; }
-        .form-group:nth-child(6) { animation-delay: 0.6s; }
-        .form-group:nth-child(7) { animation-delay: 0.7s; }
-        .form-group:nth-child(8) { animation-delay: 0.8s; }
-        .form-group:nth-child(9) { animation-delay: 0.9s; }
-        .form-group:nth-child(10) { animation-delay: 1s; }
-    </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <img src="https://i.imghippo.com/files/RC3874tJ.png" alt="PhyGeeks Logo" class="logo" onclick="window.location.href='tel:+9607212424'">
-            <h1>Application form for Online Physics Class</h1>
-            <p class="subtitle">With <a href="https://sites.google.com/view/about-muzaah-sir/home" target="_blank">Muzaah Sir</a></p>
-        </header>
-        
-        <div class="form-container" id="applicationForm">
-            <div class="form-group">
-                <label for="studentName">Student Name</label>
-                <input type="text" id="studentName" name="studentName" required placeholder="Enter student's full name">
+        <div id="welcome-screen" class="screen active">
+            <div class="logo-container">
+                <img src="https://i.imghippo.com/files/RC3874tJ.png" alt="Phygeeks Logo" class="logo animated-logo">
             </div>
-            
-            <div class="form-group">
-                <label for="contactNumber">Contact Number</label>
-                <div class="input-with-prefix">
-                    <span class="prefix">+960</span>
-                    <input type="tel" id="contactNumber" name="contactNumber" required placeholder="Enter a valid mobile number" pattern="[2379][0-9]{6}" maxlength="7">
-                </div>
+            <div class="welcome-message">
+                <h1>Welcome to Phygeeks</h1>
+                <p class="law-text">First law of Phygeeks: learning made simple. 🚀</p>
             </div>
-            
-            <div class="form-group">
-                <label for="grade">Grade</label>
-                <select id="grade" name="grade" required>
-                    <option value="">Select Grade</option>
-                    <option value="Grade 9">Grade 9</option>
-                    <option value="Grade 10">Grade 10</option>
-                </select>
-            </div>
-            
-            <div class="form-group" id="lastGradeContainer" style="display: none;">
-                <label for="lastGrade">Last Grade Acquired (For Grade 10 only)</label>
-                <input type="text" id="lastGrade" name="lastGrade" placeholder="Enter last grade achieved">
-            </div>
-            
-            <div class="form-group">
-                <label for="school">School</label>
-                <input type="text" id="school" name="school" required placeholder="Enter school name">
-            </div>
-            
-            <div class="form-group">
-                <label for="atollIsland">Atoll / Island</label>
-                <input type="text" id="atollIsland" name="atollIsland" required placeholder="e.g., K.Male'">
-            </div>
-            
-            <div class="form-group">
-                <label for="email">Mail (Gmail)</label>
-                <input type="email" id="email" name="email" required placeholder="Enter your Gmail address" pattern="[a-z0-9._%+-]+@gmail\.com$">
-                <small class="hint">Must be a valid Gmail address</small>
-            </div>
-            
-            <div class="form-group">
-                <label for="guardianName">Name of Guardian</label>
-                <input type="text" id="guardianName" name="guardianName" required placeholder="Enter guardian's full name">
-            </div>
-            
-            <div class="form-group">
-                <label for="guardianContact">Guardian Contact Number</label>
-                <div class="input-with-prefix">
-                    <span class="prefix">+960</span>
-                    <input type="tel" id="guardianContact" name="guardianContact" required placeholder="Enter a valid mobile number" pattern="[2379][0-9]{6}" maxlength="7">
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="telegramNumber">Number for Communication (Telegram)</label>
-                <div class="input-with-prefix">
-                    <span class="prefix">+960</span>
-                    <input type="tel" id="telegramNumber" name="telegramNumber" required placeholder="Enter a valid mobile number" pattern="[79][0-9]{6}" maxlength="7">
-                </div>
-            </div>
-            
-            <div class="btn-container">
-                <button type="button" class="btn" id="nextBtn">Next</button>
+            <button id="start-btn" class="btn-primary start-button-glare">Start Application</button>
+            <div class="copyright">
+                <p>&copy; 2025 Phygeeks. All rights reserved.</p>
             </div>
         </div>
-        
-        <div class="timing-container hidden" id="timingContainer">
-            <h2>Class Timings</h2>
-            <iframe src="https://docs.google.com/presentation/d/1vdK7kHtbVx04qJHkDDy0aqPEEuwoVG3teTFCqGztkRc/embed?start=true&loop=true&delayms=3000" frameborder="0" class="timing-slide" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-            <div class="btn-container" style="margin-top: 20px;">
-                <button type="button" class="btn" id="acceptBtn">Accept Timings</button>
-            </div>
-        </div>
-    </div>
-    
-    <div class="modal" id="confirmationModal">
-        <div class="modal-content">
-            <h2>Thank You for Your Application!</h2>
-            <p>I hereby agree to pay a monthly fee of MVR 350/- before 10th of every month</p>
-            <p>Please note: To confirm enrollment of the student, you will receive a message to join the Telegram Group. All communication will proceed via that Telegram group.</p>
-            <p>To make the payment please use our portal <a href="url.mv/phygeekspay" target="_blank">url.mv/phygeekspay</a></p>
-            <button type="button" class="modal-btn" id="confirmBtn">I accept</button>
-        </div>
-    </div>
-    
-    <footer>
-        Form created by <a href="https://www.facebook.com/share/17gWWZBSLp/" target="_blank">Simplio Solutions</a>
-    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    // Show/hide last grade field based on grade selection
-    const gradeSelect = document.getElementById('grade');
-    const lastGradeContainer = document.getElementById('lastGradeContainer');
-    
-    gradeSelect.addEventListener('change', function() {
-        if (this.value === 'Grade 10') {
-            lastGradeContainer.style.display = 'block';
-            document.getElementById('lastGrade').required = true;
-        } else {
-            lastGradeContainer.style.display = 'none';
-            document.getElementById('lastGrade').required = false;
-        }
-    });
-    
-    // Next button click handler
-    document.getElementById('nextBtn').addEventListener('click', function() {
-        const form = document.getElementById('applicationForm');
-        const inputs = form.querySelectorAll('input[required], select[required]');
-        let isValid = true;
-        
-        // Validate all required fields
-        inputs.forEach(input => {
-            if (!input.value.trim()) {
-                input.style.borderColor = 'var(--secondary)';
-                isValid = false;
-            } else {
-                input.style.borderColor = '#e0e0e0';
-            }
-            
-            // Additional validation for pattern-based fields
-            if (input.hasAttribute('pattern')) {
-                const regex = new RegExp(input.getAttribute('pattern'));
-                if (!regex.test(input.value)) {
-                    input.style.borderColor = 'var(--secondary)';
-                    isValid = false;
-                }
-            }
-        });
-        
-        if (isValid) {
-            document.getElementById('applicationForm').classList.add('hidden');
-            document.getElementById('timingContainer').classList.remove('hidden');
-            window.scrollTo(0, 0);
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Error',
-                text: 'Please fill all required fields correctly',
-                confirmButtonColor: 'var(--primary)'
-            });
-        }
-    });
-    
-    // Accept button click handler
-    document.getElementById('acceptBtn').addEventListener('click', function() {
-        document.getElementById('confirmationModal').classList.add('active');
-    });
-    
-    // Confirm button click handler
-    document.getElementById('confirmBtn').addEventListener('click', function() {
-        // Submit the form data
-        submitForm();
-    });
-    
-    // Form submission function
-    function submitForm() {
-        const formData = {
-            studentName: document.getElementById('studentName').value,
-            contactNumber: '+960' + document.getElementById('contactNumber').value,
-            grade: document.getElementById('grade').value,
-            lastGrade: document.getElementById('lastGrade').value || 'N/A',
-            school: document.getElementById('school').value,
-            atollIsland: document.getElementById('atollIsland').value,
-            email: document.getElementById('email').value,
-            guardianName: document.getElementById('guardianName').value,
-            guardianContact: '+960' + document.getElementById('guardianContact').value,
-            telegramNumber: '+960' + document.getElementById('telegramNumber').value,
-            timestamp: new Date().toLocaleString()
-        };
-        
-        // Show loading indicator
-        Swal.fire({
-            title: 'Submitting...',
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            }
-        });
-        
-        // Send data to Google Sheets
-        fetch('https://script.google.com/macros/s/AKfycbzaIp0l7oGZHzV-LPKcu6s2QOTceulIB7NJIVzgISVRQJp4R6F2d8ZMzszzD1far1Ur/exec', { // Replace with your web app URL
-            method: 'POST',
-            body: JSON.stringify(formData),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Application Submitted!',
-                html: `Thank you for your application.<br><br>
-                      A confirmation email has been sent to ${formData.email}.<br>
-                      Please check your inbox (and spam folder).`,
-                confirmButtonColor: 'var(--primary)'
-            });
-            
-            // Hide modal
-            document.getElementById('confirmationModal').classList.remove('active');
-            
-            // Reset form
-            document.getElementById('applicationForm').reset();
-            document.getElementById('applicationForm').classList.remove('hidden');
-            document.getElementById('timingContainer').classList.add('hidden');
-            lastGradeContainer.style.display = 'none';
-        })
-        .catch(error => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Submission Failed',
-                text: 'There was an error submitting your application. Please try again later.',
-                confirmButtonColor: 'var(--primary)'
-            });
-            console.error('Error:', error);
-        });
-    }
-});
-    </script>
+        <div id="application-form" class="screen">
+            <div class="form-container glass">
+                <div class="form-header">
+                    <img src="https://i.imghippo.com/files/RC3874tJ.png" alt="Phygeeks Logo" class="form-logo">
+                    <h2>Phygeeks Application Form</h2>
+                </div>
+
+                <div class="form-section active" id="student-info">
+                    <h3>Student Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="student-name">Student Name</label>
+                        <input type="text" id="student-name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" class="form-control" required>
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="national-id">National ID #</label>
+                        <input type="text" id="national-id" class="form-control" required >
+                        <small class="form-text">No spaces or dashes allowed</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="atoll">Atoll</label>
+                        <select id="atoll" class="form-control" required>
+                            <option value="">Select Atoll</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="island">Island</label>
+                        <select id="island" class="form-control" required>
+                            <option value="">Select Island</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact-number">Contact Number</label>
+                        <input type="tel" id="contact-number" class="form-control" required>
+                        <small class="form-text">This must be the official contact number of the student and should have Telegram installed. This number will be used for communication.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="school">School</label>
+                        <input type="text" id="school" class="form-control" list="schools-list" required>
+                        <datalist id="schools-list"></datalist>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="grade">Grade</label>
+                        <select id="grade" class="form-control" required>
+                            <option value="">Select Grade</option>
+                            <option value="Grade 9">Grade 9</option>
+                            <option value="Grade 10">Grade 10</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                        <small class="form-text email-note">**Note:** While you can use any valid email, only **Gmail** addresses will be accepted for official class communication due to technical requirements.</small>
+                    </div>
+                    
+                    <div class="form-buttons-container">
+                        <button class="btn-primary next-section" data-next="parent-info">Continue to Parent Information</button>
+                    </div>
+                </div>
+
+                <div class="form-section" id="parent-info">
+                    <div class="law-message glass-law">
+                        <p class="law-header">Second Law of Phygeeks: The Law of Clarity</p>
+                        <p class="law-description">Every lesson begins in confusion, but ends in clarity — that's the Phygeeks guarantee. ✨</p>
+                    </div>
+                    
+                    <h3>Parent Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="parent-name">Parent Name</label>
+                        <input type="text" id="parent-name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="relation">Relation to Student</label>
+                        <input type="text" id="relation" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="parent-contact">Contact Number</label>
+                        <input type="tel" id="parent-contact" class="form-control" required>
+                        <small class="form-text">Please enter a valid 7-digit number for emergency contact.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="parent-email">Email Address</label>
+                        <input type="email" id="parent-email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-buttons-container">
+                        <div class="form-buttons">
+                            <button class="btn-secondary prev-section" data-prev="student-info">Back</button>
+                            <button class="btn-primary next-section" data-next="background-info">Continue to Background Information</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section" id="background-info">
+                    <div class="law-message glass-law">
+                        <p class="law-header">Third Law of Phygeeks: The Law of Transformation</p>
+                        <p class="law-description">Energy can't be created or destroyed — only transformed into results, with Phygeeks. 📝⚡</p>
+                    </div>
+                    
+                    <h3>Background Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="device">Select device you will use for class</label>
+                        <select id="device" class="form-control" required>
+                            <option value="">Select Device</option>
+                            <option value="Laptop/Desktop">Laptop/Desktop</option>
+                            <option value="Tablet/Ipad">Tablet/Ipad</option>
+                            <option value="Phone">Phone</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="physics-difficulty">How do you find Physics?</label>
+                        <select id="physics-difficulty" class="form-control" required>
+                            <option value="">Select Difficulty</option>
+                            <option value="Very Hard">Very Hard</option>
+                            <option value="Hard">Hard</option>
+                            <option value="Average">Average</option>
+                            <option value="Easy">Easy</option>
+                            <option value="Very Easy">Very Easy</option>
+                            <option value="I don't know">I don't know</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="last-exam-grade">Grade of the last exam</label>
+                        <select id="last-exam-grade" class="form-control" required>
+                            <option value="">Select Grade</option>
+                            <option value="A*">A*</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="U">U</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="difficult-units">Choose the difficult units (Rank from most difficult to least)</label>
+                        <div class="ranking-container">
+                            <div class="ranking-instructions">
+                                <p>Select units and rank them by dragging. Most difficult = 1, Least difficult = 6</p>
+                            </div>
+                            <div id="difficult-units" class="units-container">
+                                </div>
+                            <div id="ranking-display" class="ranking-display">
+                                <p>Your ranking will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-buttons-container">
+                        <div class="form-buttons">
+                            <button class="btn-secondary prev-section" data-prev="parent-info">Back</button>
+                            <button id="submit-btn" class="btn-primary">Submit Application</button>
+                            <!-- <button class="btn-primary next-section" data-next="document-upload">Continue to Document Upload</button> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="form-section" id="document-upload">
+                    <h3>Upload Student National ID Photo</h3>
+                    
+                    <div class="form-group">
+                        <label for="id-photo">Upload a photo of National ID card</label>
+                        <div class="upload-options">
+                            <button type="button" id="camera-btn" class="btn-upload">
+                                <span>📷 Take Photo</span>
+                            </button>
+                            <button type="button" id="gallery-btn" class="btn-upload">
+                                <span>🖼️ Choose from Gallery</span>
+                            </button>
+                        </div>
+                        <input type="file" id="id-photo" class="form-control hidden" accept="image/*" capture="camera" required>
+                        
+                        <div id="file-preview" class="file-preview">
+                            <div id="upload-progress" class="upload-progress hidden">Uploading... 0%</div>
+                        </div>
+                        
+                        <small class="form-text">You can take a picture immediately or upload from gallery</small>
+                    </div>
+                    
+                    <div class="form-buttons-container">
+                        <div class="form-buttons">
+                            <button class="btn-secondary prev-section" data-prev="background-info">Back</button>
+                            <button id="submit-btn" class="btn-primary">Submit Application</button>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <div id="success-screen" class="screen">
+            <div class="success-container glass" id="success-content">
+                <div class="success-icon">✓</div>
+                <h2>Application Submitted Successfully!</h2>
+                <div class="law-message glass-law">
+                    <p class="law-header">Fourth law of Phygeeks: The Law of Permanence</p>
+                    <p class="law-description">Knowledge is the ultimate constant — once you've learned it with Phygeeks, it stays with you forever. 🧑‍🎓🌟</p>
+                </div>
+                <p class="success-message">Thank you! We have received your registration. You will soon be added to a group and further instructions will be given in the group.</p>
+                <div class="reference-number">
+                    <p>Your Reference Number:</p>
+                    <h3 id="ref-number"></h3>
+                </div>
+                <div class="success-buttons">
+                    <button id="download-btn" class="btn-secondary">📥 Download Verification</button>
+                    <button id="close-btn" class="btn-primary">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
