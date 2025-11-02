@@ -13,7 +13,7 @@ const sectionFields = {
     'student-info': ['student-name', 'gender', 'national-id', 'atoll', 'island', 'address', 'contact-number', 'school', 'grade', 'email'],
     'parent-info': ['parent-name', 'relation', 'parent-contact', 'parent-email'],
     'background-info': ['device', 'physics-difficulty', 'last-exam-grade'],
-    'document-upload': ['id-photo']
+    // 'document-upload': ['id-photo']
 };
 
 // Physics units for ranking
@@ -28,7 +28,8 @@ const physicsUnits = [
 
 // Google Apps Script Web App URL - **IMPORTANT: YOU MUST REPLACE THIS WITH YOUR DEPLOYED WEB APP URL**
 // NOTE: "Failed to fetch" is usually because this script is not deployed with "Who has access" set to "Anyone."
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwChlsSymYCdH3b0pWLLheipDADIGstc94wLIrKeZJ_Wd6GiT5u3_daPDjs44anU6X8/exec'; 
+const WEB_APP_URL = import.meta.env.VITE_WEB_APP_URL;
+// console.log({WEB_APP_URL})
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
@@ -98,9 +99,10 @@ async function loadDataFromSheets() {
 
         schools = responses[1]
             .split(/[\r\n]+/)
-            .slice(1).map(school => school[0]);
+            .slice(1)
+            // .map(school => school[0]);
 
-        console.log({schools})
+        // console.log({schools})
         
         atolls = new Set(regions.map(r => r.atoll)); // Set of unique atolls
         islands = regions.map(r => r.island);
@@ -275,6 +277,8 @@ function populateDropdowns() {
         option.textContent = island;
         islandSelect.appendChild(option);
     });
+
+    console.log({schools})
     
     schools.forEach(school => {
         const option = document.createElement('option');
@@ -716,11 +720,7 @@ async function submitForm() {
         
     } catch (error) {
         console.error('Error submitting form:', error);
-        alert('There was an error submitting your application. Please check your network connection and try again. If you are using CodePen, this is expected. You must deploy your Google Script publicly.');
-        
-        // FALLBACK: Since you mentioned the download receipt works, we provide a temp reference
-        formData.referenceNumber = 'TEMP-' + Date.now().toString().slice(-6);
-        showSuccessScreen(formData.referenceNumber);
+        alert('There was an error submitting your application.');
         
         // Reset button for safety
         const submitBtn = document.getElementById('submit-btn');
@@ -779,14 +779,13 @@ async function submitToGoogleSheets() {
     try {
         const response = await fetch(WEB_APP_URL, {
             method: 'POST',
+            redirect: 'follow',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/plain',
             },
             body: JSON.stringify({
                 action: 'submitForm',
-                formData: formData,
-                fileData: uploadedFileBase64,
-                fileName: uploadedFileName
+                formData: Object.values(formData)
             })
         });
         
