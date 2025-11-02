@@ -80,8 +80,8 @@ function setupEventListeners() {
 async function loadDataFromSheets() {
     try {
         console.log('Loading data from Google Sheets: started');
-        const regionsCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQC2fYj0Ps60Df2oc3_DrKOdc8YSiQMSyfHprwITAgfZwxC5Al7BFALXoeEqTGB74xN9jEhrvqtyqG/pub?gid=1346222018&single=true&output=csv";
-        const schoolsCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQC2fYj0Ps60Df2oc3_DrKOdc8YSiQMSyfHprwITAgfZwxC5Al7BFALXoeEqTGB74xN9jEhrvqtyqG/pub?gid=108138081&single=true&output=csv";
+        const regionsCsvUrl = import.meta.env.VITE_REGIONS_CSV_URL;
+        const schoolsCsvUrl = import.meta.env.VITE_SCHOOLS_CSV_URL;
         
         const responses = await Promise.all([
             fetch(regionsCsvUrl, {redirect: 'follow'}).then(response => response.text()),
